@@ -1,19 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-app
+  name: argo-app
+  namespace: test-argo
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-app
+      app: argo-app
   template:
     metadata:
       labels:
-        app: hello-app
+        app: argo-app
     spec:
       containers:
-      - name: hello-app
-        image: image-registry.openshift-image-registry.svc:5000/cicd-demo/demo-app:latest
-        ports:
-        - containerPort: 80
+        - name: argo-app
+          image: default-route-openshift-image-registry.apps.tafcopl.cdot.in/test-argo/argo-app:latest
+          ports:
+            - containerPort: 8080
