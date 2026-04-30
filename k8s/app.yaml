@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-app
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: test-argo
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/Amit042/hello-cicd.git
+    targetRevision: main
+    path: k8s
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
